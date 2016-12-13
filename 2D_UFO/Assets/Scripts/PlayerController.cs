@@ -22,4 +22,13 @@ public class PlayerController : MonoBehaviour {
 
         mRigidBody2D.AddForce(new Vector2(moveHorizontal, moveVertical) * speed);
     }
+
+    
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.CompareTag("PickUp"))
+        {
+            other.gameObject.SetActive(false);
+        }
+    }
 }
