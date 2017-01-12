@@ -6,35 +6,33 @@ public class Inventory : MonoBehaviour
     public Image[] itemImages = new Image[numItemSlots];
     public Item[] items = new Item[numItemSlots];
 
+    public const int numItemSlots = 4; //public so that the custom inventory editor can access it
 
-    public const int numItemSlots = 4;
 
-
-    public void AddItem(Item itemToAdd)
+    public void AddItem(Item toAdd)
     {
-        for (int i = 0; i < items.Length; i++)
+        for(int i = 0; i < items.Length; ++i)
         {
-            if (items[i] == null)
+            if(items[i] == null)
             {
-                items[i] = itemToAdd;
-                itemImages[i].sprite = itemToAdd.sprite;
+                items[i] = toAdd;
+                itemImages[i].sprite = toAdd.sprite;
                 itemImages[i].enabled = true;
-                return;
+                break;
             }
         }
     }
 
-
-    public void RemoveItem (Item itemToRemove)
+    public void RemoveItem(Item toRemove)
     {
-        for (int i = 0; i < items.Length; i++)
+        for(int i = 0; i<items.Length; ++i)
         {
-            if (items[i] == itemToRemove)
+            if(items[i] == toRemove)
             {
                 items[i] = null;
-                itemImages[i].sprite = null;
+                itemImages[i] = null;
                 itemImages[i].enabled = false;
-                return;
+                break;
             }
         }
     }
