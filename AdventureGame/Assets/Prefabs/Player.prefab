@@ -2306,6 +2306,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 95743810186920774}
   navMeshAgent: {fileID: 195533719269287858}
+  playerSaveData: {fileID: 11400000, guid: 55d72825bf06cf44e9cbc1b37812cc6f, type: 2}
   inputHoldDelay: 0.5
   turnSpeedThreshold: 0.5
   speedDampTime: 0.1
