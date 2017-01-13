@@ -30,7 +30,7 @@ public class Inventory : MonoBehaviour
             if(items[i] == toRemove)
             {
                 items[i] = null;
-                itemImages[i] = null;
+                itemImages[i].sprite = null;
                 itemImages[i].enabled = false;
                 break;
             }
