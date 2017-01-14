@@ -66,6 +66,7 @@ public class ConditionCollectionEditor : EditorWithSubEditors<ConditionEditor, C
 
         if (GUILayout.Button("Remove Collection", GUILayout.Width(collectionButtonWidth)))
         {
+            //Extension method
             collectionsProperty.RemoveFromObjectArray (conditionCollection);
         }
 

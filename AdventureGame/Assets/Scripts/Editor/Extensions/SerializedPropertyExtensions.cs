@@ -37,6 +37,7 @@ public static class SerializedPropertyExtensions
     }
 
 
+    //static here means it's part of that type but is an instance method
     public static void RemoveFromObjectArray<T> (this SerializedProperty arrayProperty, T elementToRemove)
         where T : Object
     {
