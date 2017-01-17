@@ -71,10 +71,12 @@ public class ReactionCollectionEditor : EditorWithSubEditors<ReactionEditor, Rea
         leftAreaRect.width -= controlSpacing * 0.5f;
         leftAreaRect.height = dropAreaHeight;
 
+
         Rect rightAreaRect = leftAreaRect;
         rightAreaRect.x += rightAreaRect.width + controlSpacing;
 
-        TypeSelectionGUI (leftAreaRect);
+
+        TypeSelectionGUI (leftAreaRect); //Dropdown + button selection
         DragAndDropAreaGUI (rightAreaRect);
 
         DraggingAndDropping(rightAreaRect, this);
@@ -113,6 +115,7 @@ public class ReactionCollectionEditor : EditorWithSubEditors<ReactionEditor, Rea
 
 
     private static void DraggingAndDropping (Rect dropArea, ReactionCollectionEditor editor)
+        //Can be reused to deal with drag and drop in any Unity project
     {
         Event currentEvent = Event.current;
 
@@ -123,11 +126,12 @@ public class ReactionCollectionEditor : EditorWithSubEditors<ReactionEditor, Rea
         {
             case EventType.DragUpdated:
 
+                //Visual cue in the editor
                 DragAndDrop.visualMode = IsDragValid () ? DragAndDropVisualMode.Link : DragAndDropVisualMode.Rejected;
                 currentEvent.Use ();
 
                 break;
-            case EventType.DragPerform:
+            case EventType.DragPerform: //Only happens if VisualMode has been set to link
                 
                 DragAndDrop.AcceptDrag();
                 
@@ -150,22 +154,33 @@ public class ReactionCollectionEditor : EditorWithSubEditors<ReactionEditor, Rea
 
     private static bool IsDragValid ()
     {
+        bool toReturn = true;
+
         for (int i = 0; i < DragAndDrop.objectReferences.Length; i++)
         {
-            if (DragAndDrop.objectReferences[i].GetType () != typeof (MonoScript))
-                return false;
+            if (DragAndDrop.objectReferences[i].GetType () != typeof(MonoScript))
+            {
+                toReturn = false;
+                break;
+            }                
             
             MonoScript script = DragAndDrop.objectReferences[i] as MonoScript;
             Type scriptType = script.GetClass ();
 
             if (!scriptType.IsSubclassOf (typeof(Reaction)))
-                return false;
+            {
+                toReturn = false;
+                break;
+            }
 
             if (scriptType.IsAbstract)
-                return false;
+            {
+                toReturn = false;
+                break;
+            }
         }
 
-        return true;
+        return toReturn;
     }
 
 
