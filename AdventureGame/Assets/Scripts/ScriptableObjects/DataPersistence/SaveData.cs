@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 [CreateAssetMenu]
 public class SaveData : ResettableScriptableObject
+    // ScriptableObject is suitable for temporary save, not permanent
 {
     [Serializable]
     public class KeyValuePairLists<T>
@@ -22,15 +23,15 @@ public class SaveData : ResettableScriptableObject
         public void TrySetValue (string key, T value)
         {
             int index = keys.FindIndex(x => x == key);
-
-            if (index > -1)
+            
+            if(index > -1)
             {
                 values[index] = value;
             }
             else
             {
-                keys.Add (key);
-                values.Add (value);
+                keys.Add(key);
+                values.Add(value);
             }
         }
 
@@ -39,7 +40,7 @@ public class SaveData : ResettableScriptableObject
         {
             int index = keys.FindIndex(x => x == key);
 
-            if (index > -1)
+            if(index > -1)
             {
                 value = values[index];
                 return true;
